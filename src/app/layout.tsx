@@ -11,7 +11,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Asif's PortFolio",
+  title: "Asif's PortFolio | Home",
   description: "It is portfolio of Asif who is a full Stack Web Developer",
 };
 
