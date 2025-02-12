@@ -1,4 +1,7 @@
-import { useUpdateProjectMutation } from "@/redux/apis/apis.slice";
+import {
+  useDeleteProjectMutation,
+  useUpdateProjectMutation,
+} from "@/redux/apis/apis.slice";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "./ui/button";
@@ -18,7 +21,6 @@ const ProjectsTable = ({ project }: any) => {
   console.log(project);
 
   // form for update form
-
   const [updateProject] = useUpdateProjectMutation();
 
   const { register, handleSubmit } = useForm<any>();
@@ -27,6 +29,18 @@ const ProjectsTable = ({ project }: any) => {
       _id: project?._id,
       data,
     });
+
+  // delete product
+  const [deleteProject] = useDeleteProjectMutation();
+
+  const handleProjectDelete = (projectId: string) => {
+    const confirmPronPrompt = prompt("Write delete to remove project");
+    if (confirmPronPrompt === "delete") {
+      deleteProject(projectId);
+    } else {
+      console.log("Wrong Input");
+    }
+  };
 
   return (
     <div>
@@ -92,6 +106,13 @@ const ProjectsTable = ({ project }: any) => {
             </SheetHeader>
           </SheetContent>
         </Sheet>
+        {/* delete  */}
+        <Button
+          variant="destructive"
+          onClick={() => handleProjectDelete(project?._id)}
+        >
+          Delete
+        </Button>
       </TableRow>
     </div>
   );
