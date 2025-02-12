@@ -1,4 +1,5 @@
 import {
+  useAddProjectMutation,
   useDeleteProjectMutation,
   useUpdateProjectMutation,
 } from "@/redux/apis/apis.slice";
@@ -18,8 +19,6 @@ import { TableCell, TableRow } from "./ui/table";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const ProjectsTable = ({ project }: any) => {
-  console.log(project);
-
   // form for update form
   const [updateProject] = useUpdateProjectMutation();
 
@@ -42,6 +41,16 @@ const ProjectsTable = ({ project }: any) => {
     }
   };
 
+  const [addProject] = useAddProjectMutation();
+
+  // Second form for add blog
+  const { register: registerForm2, handleSubmit: handleSubmitForm2 } =
+    useForm();
+
+  const onSubmitForm2: SubmitHandler<any> = (data) => {
+    addProject(data);
+  };
+
   return (
     <div>
       <TableRow key={project?._id}>
@@ -51,6 +60,57 @@ const ProjectsTable = ({ project }: any) => {
         </TableCell>
         <TableCell>{project?.title}</TableCell>
         <TableCell>{project?.liveLink}</TableCell>
+        {/* Add project */}
+        <Sheet>
+          <SheetTrigger className="mr-1">
+            <Button className="bg-slate-600 ms-1">Add Project</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Add Blog Information</SheetTitle>
+              <SheetDescription>
+                <form onSubmit={handleSubmitForm2(onSubmitForm2)}>
+                  <label htmlFor="title">Title</label>
+                  <Input
+                    {...registerForm2("title")}
+                    type="text"
+                    placeholder="Title"
+                    id="title"
+                    name="title"
+                  />
+                  <label htmlFor="description">Description</label>
+                  <Input
+                    {...registerForm2("description")}
+                    type="text"
+                    placeholder="description"
+                    id="description"
+                    name="description"
+                  />
+                  <label htmlFor="image">image</label>
+                  <Input
+                    {...registerForm2("image")}
+                    type="text"
+                    placeholder="image"
+                    id="image"
+                    name="image"
+                  />
+                  <label htmlFor="image">liveLink</label>
+                  <Input
+                    {...registerForm2("liveLink")}
+                    type="text"
+                    placeholder="liveLink"
+                    id="liveLink"
+                    name="liveLink"
+                  />
+                  <br />
+                  <Button type="submit" className="w-full">
+                    Add Project
+                  </Button>
+                </form>
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
         {/* Update Product */}
         <Sheet>
           <SheetTrigger className="mr-1">

@@ -38,6 +38,7 @@ export const baseApi = createApi({
     }),
     addProject: builder.mutation({
       query: (options) => {
+        console.log(options);
         return {
           url: "/project/create-project",
           method: "POST",
@@ -63,7 +64,7 @@ export const baseApi = createApi({
       },
     }),
     addContact: builder.mutation({
-      query: (options) => {
+      query: ({ options }) => {
         return {
           url: "/contact/create-contact",
           method: "POST",
