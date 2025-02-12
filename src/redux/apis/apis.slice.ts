@@ -33,6 +33,9 @@ export const baseApi = createApi({
         };
       },
     }),
+    getProjects: builder.query({
+      query: () => "/project",
+    }),
     addProject: builder.mutation({
       query: (options) => {
         return {
@@ -80,4 +83,5 @@ export const {
   useUpdateProjectMutation,
   useDeleteProjectMutation,
   useAddContactMutation,
+  useGetProjectsQuery,
 } = baseApi;
