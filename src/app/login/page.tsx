@@ -14,7 +14,8 @@ const LoginPage = () => {
             className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full shadow-md hover:bg-gray-200"
             onClick={() =>
               signIn("google", {
-                callbackUrl: "http://localhost:3000/dashboard",
+                callbackUrl:
+                  "https://a5-portfolio-frontend.vercel.app/dashboard",
               })
             }
           >
@@ -29,7 +30,8 @@ const LoginPage = () => {
             className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full shadow-md hover:bg-gray-200"
             onClick={() =>
               signIn("github", {
-                callbackUrl: "http://localhost:3000/dashboard",
+                callbackUrl:
+                  "https://a5-portfolio-frontend.vercel.app/dashboard",
               })
             }
           >
