@@ -1,6 +1,19 @@
+"use client";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const Navbar = () => {
+type UserProps = {
+  user?: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  };
+};
+
+const Navbar = ({ session }: { session: UserProps | null }) => {
+  const pathname = usePathname();
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -39,18 +52,26 @@ const Navbar = () => {
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+              <Link
+                href="/"
+                className={
+                  pathname === "/"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
                 aria-current="page"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <Link
                 href="/projects"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                className={
+                  pathname === "/projects"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
               >
                 Projects
               </Link>
@@ -58,15 +79,60 @@ const Navbar = () => {
             <li>
               <Link
                 href="/blog"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                className={
+                  pathname === "/blog"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
               >
                 Blogs
               </Link>
             </li>
             <li>
               <Link
+                href="/contact"
+                className={
+                  pathname === "/contact"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
+              >
+                Contact
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/dashboard"
+                className={
+                  pathname === "/dashboard"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/messages"
+                className={
+                  pathname === "/dashboard/messages"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
+              >
+                Messages
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/dashboard/blogs"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                className={
+                  pathname === "/dashboard/blogs"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
               >
                 Blog Management
               </Link>
@@ -74,11 +140,35 @@ const Navbar = () => {
             <li>
               <Link
                 href="/dashboard/projects"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                className={
+                  pathname === "/dashboard/projects"
+                    ? "text-blue-500 underline"
+                    : "text-black cursor-pointer hover:underline"
+                }
               >
                 Projects management
               </Link>
             </li>
+            <div className="flex items-center">
+              {session?.user ? (
+                <div>
+                  <button
+                    className="border border-red-500 text-red-500 px-5 py-2 rounded-full hover:bg-red-500 hover:text-black transition duration-200"
+                    onClick={() => signOut()}
+                  >
+                    Logout
+                  </button>
+                  <small> Welcome: {session?.user?.name}</small>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="border border-teal-500 text-teal-500 px-5 py-2 rounded-full hover:bg-teal-500 hover:text-black transition duration-200"
+                >
+                  Login
+                </Link>
+              )}
+            </div>
           </ul>
         </div>
       </div>

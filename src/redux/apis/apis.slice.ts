@@ -64,7 +64,8 @@ export const baseApi = createApi({
       },
     }),
     addContact: builder.mutation({
-      query: ({ options }) => {
+      query: (options) => {
+        console.log(options);
         return {
           url: "/contact/create-contact",
           method: "POST",

@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useAddContactMutation } from "@/redux/apis/apis.slice";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type Inputs = {
@@ -9,8 +10,10 @@ type Inputs = {
 };
 
 const ContactPage = () => {
+  const [addMessage] = useAddContactMutation();
+
   const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => addMessage(data);
 
   return (
     <div>
