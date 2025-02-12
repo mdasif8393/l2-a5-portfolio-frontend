@@ -41,7 +41,6 @@ const ProjectsTable = ({ project }: any) => {
       deleteProject(projectId);
       toast.success("Project is deleted successfully");
     } else {
-      console.log("Wrong Input");
     }
   };
 

@@ -8,9 +8,12 @@ export const metadata: Metadata = {
 };
 
 const Projects = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/project", {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    "https://a5-portfolio-server.vercel.app/api/v1/project",
+    {
+      cache: "no-store",
+    }
+  );
   const projects = await res.json();
 
   return (

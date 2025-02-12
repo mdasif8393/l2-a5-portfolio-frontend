@@ -12,7 +12,7 @@ import {
 import { useGetProjectsQuery } from "@/redux/apis/apis.slice";
 
 const ProjectsDashboard = () => {
-  const { data, isLoading } = useGetProjectsQuery(undefined);
+  const { data } = useGetProjectsQuery(undefined);
   return (
     <div>
       <Table>

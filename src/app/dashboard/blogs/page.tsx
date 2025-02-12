@@ -12,7 +12,7 @@ import {
 import { useGetBlogsQuery } from "@/redux/apis/apis.slice";
 
 const BlogsManagement = () => {
-  const { data, isLoading } = useGetBlogsQuery(undefined);
+  const { data } = useGetBlogsQuery(undefined);
 
   return (
     <div>

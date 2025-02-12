@@ -3,14 +3,16 @@ import Image from "next/image";
 const BlogDetailsCard = async ({
   params,
 }: {
-  params: Promise<{ projectId: string }>;
+  params: Promise<{ blogId: string }>;
 }) => {
   const { blogId } = await params;
 
-  const res = await fetch(`http://localhost:5000/api/v1/blog/${blogId}`);
+  const res = await fetch(
+    `https://a5-portfolio-server.vercel.app/api/v1/blog/${blogId}`
+  );
   const blog = await res.json();
   const { data } = blog;
-  console.log(data);
+
   return (
     <div>
       <h1 className="text-3xl text-center my-5 font-bold">

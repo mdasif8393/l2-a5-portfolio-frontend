@@ -8,9 +8,12 @@ export const metadata: Metadata = {
 };
 
 const DashboardMessages = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/contact", {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    "https://a5-portfolio-server.vercel.app/api/v1/contact",
+    {
+      cache: "no-store",
+    }
+  );
   const messages = await res.json();
   return (
     <div className="w-[90%] mx-auto">

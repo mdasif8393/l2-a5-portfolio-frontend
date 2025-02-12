@@ -2,7 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://a5-portfolio-server.vercel.app/api/v1",
+  }),
   tagTypes: ["blog", "product"],
   endpoints: (builder) => ({
     getBlogs: builder.query({
@@ -44,7 +46,6 @@ export const baseApi = createApi({
     }),
     addProject: builder.mutation({
       query: (options) => {
-        console.log(options);
         return {
           url: "/project/create-project",
           method: "POST",
@@ -74,7 +75,6 @@ export const baseApi = createApi({
     }),
     addContact: builder.mutation({
       query: (options) => {
-        console.log(options);
         return {
           url: "/contact/create-contact",
           method: "POST",
