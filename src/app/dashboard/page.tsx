@@ -6,7 +6,6 @@ import Image from "next/image";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
-  console.log(session);
 
   return (
     <div>

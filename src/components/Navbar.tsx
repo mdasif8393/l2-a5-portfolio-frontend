@@ -1,5 +1,6 @@
 "use client";
 import { signOut } from "next-auth/react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,6 +14,7 @@ type UserProps = {
 
 const Navbar = ({ session }: { session: UserProps | null }) => {
   const pathname = usePathname();
+  const { setTheme } = useTheme();
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">

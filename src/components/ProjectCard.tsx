@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import {
@@ -13,20 +14,19 @@ import {
 const ProjectCard = ({ project }: any) => {
   return (
     <div className="my-10 grid lg:grid-cols-3 md:grid-cols-2 gap-4 sm:grid-cols-1 px-6">
-      {/* <div className="">
-        <img className="object-contain max-w-lg" src={project?.image} alt="" />
-      </div> */}
-      <Card className="basis-2/4">
+      <Card className="basis-2/4 w-72">
         <CardHeader>
+          <Image height={400} width={400} src={project?.image} alt="" />
           <CardTitle>{project?.title}</CardTitle>
           <CardDescription>{project?.description}</CardDescription>
         </CardHeader>
-        <CardContent>
-          <p>Category</p>
-        </CardContent>
+
         <CardContent>
           <p>
-            Price: <span className="text-gray-900 font-semibold">TK</span>
+            Website Link:{" "}
+            <span className="text-gray-900 font-semibold">
+              {project?.liveLink}
+            </span>
           </p>
         </CardContent>
         <CardFooter>

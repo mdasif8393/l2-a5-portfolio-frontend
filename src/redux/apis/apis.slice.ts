@@ -3,9 +3,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
+  tagTypes: ["blog", "product"],
   endpoints: (builder) => ({
     getBlogs: builder.query({
       query: () => "/blog",
+      providesTags: ["blog"],
     }),
     deleteBlog: builder.mutation({
       query: (blogId) => {
@@ -14,6 +16,7 @@ export const baseApi = createApi({
           method: "DELETE",
         };
       },
+      invalidatesTags: ["blog"],
     }),
     updateBlog: builder.mutation({
       query: (options) => {
@@ -23,6 +26,7 @@ export const baseApi = createApi({
           body: options?.data,
         };
       },
+      invalidatesTags: ["blog"],
     }),
     addBlog: builder.mutation({
       query: (options) => {
@@ -32,9 +36,11 @@ export const baseApi = createApi({
           body: options,
         };
       },
+      invalidatesTags: ["blog"],
     }),
     getProjects: builder.query({
       query: () => "/project",
+      providesTags: ["product"],
     }),
     addProject: builder.mutation({
       query: (options) => {
@@ -45,6 +51,7 @@ export const baseApi = createApi({
           body: options,
         };
       },
+      invalidatesTags: ["product"],
     }),
     updateProject: builder.mutation({
       query: (options) => {
@@ -54,6 +61,7 @@ export const baseApi = createApi({
           body: options?.data,
         };
       },
+      invalidatesTags: ["product"],
     }),
     deleteProject: builder.mutation({
       query: (projectId) => {
@@ -62,6 +70,7 @@ export const baseApi = createApi({
           method: "DELETE",
         };
       },
+      invalidatesTags: ["product"],
     }),
     addContact: builder.mutation({
       query: (options) => {

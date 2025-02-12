@@ -5,6 +5,7 @@ import {
 } from "@/redux/apis/apis.slice";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
@@ -23,11 +24,13 @@ const ProjectsTable = ({ project }: any) => {
   const [updateProject] = useUpdateProjectMutation();
 
   const { register, handleSubmit } = useForm<any>();
-  const onSubmit: SubmitHandler<any> = (data) =>
+  const onSubmit: SubmitHandler<any> = (data) => {
     updateProject({
       _id: project?._id,
       data,
     });
+    toast.success("Project is updated successfully");
+  };
 
   // delete product
   const [deleteProject] = useDeleteProjectMutation();
@@ -36,6 +39,7 @@ const ProjectsTable = ({ project }: any) => {
     const confirmPronPrompt = prompt("Write delete to remove project");
     if (confirmPronPrompt === "delete") {
       deleteProject(projectId);
+      toast.success("Project is deleted successfully");
     } else {
       console.log("Wrong Input");
     }
@@ -49,6 +53,7 @@ const ProjectsTable = ({ project }: any) => {
 
   const onSubmitForm2: SubmitHandler<any> = (data) => {
     addProject(data);
+    toast.success("Project is added successfully");
   };
 
   return (
