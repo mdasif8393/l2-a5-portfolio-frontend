@@ -1,4 +1,5 @@
 import {
+  useAddBlogMutation,
   useDeleteBlogMutation,
   useUpdateBlogMutation,
 } from "@/redux/apis/apis.slice";
@@ -27,6 +28,7 @@ const BlogsTable = ({ blog }: any) => {
     category: string;
   };
 
+  // form for update form
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     updateBlog({
@@ -45,6 +47,16 @@ const BlogsTable = ({ blog }: any) => {
     }
   };
 
+  const [addBlog] = useAddBlogMutation();
+
+  // Second form for add blog
+  const { register: registerForm2, handleSubmit: handleSubmitForm2 } =
+    useForm();
+
+  const onSubmitForm2: SubmitHandler<any> = (data) => {
+    addBlog(data);
+  };
+
   return (
     <div>
       <TableRow key={blog?._id}>
@@ -54,6 +66,57 @@ const BlogsTable = ({ blog }: any) => {
         </TableCell>
         <TableCell>{blog?.title}</TableCell>
         <TableCell>{blog?.category}</TableCell>
+        {/* Add blog */}
+        <Sheet>
+          <SheetTrigger className="mr-1">
+            <Button className="bg-slate-600 ms-1">Add Blog</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Update Blog Information</SheetTitle>
+              <SheetDescription>
+                <form onSubmit={handleSubmitForm2(onSubmitForm2)}>
+                  <label htmlFor="title">Title</label>
+                  <Input
+                    {...registerForm2("title")}
+                    type="text"
+                    placeholder="Title"
+                    id="title"
+                    name="title"
+                  />
+                  <label htmlFor="content">Content</label>
+                  <Input
+                    {...registerForm2("content")}
+                    type="text"
+                    placeholder="Content"
+                    id="content"
+                    name="content"
+                  />
+                  <label htmlFor="image">image</label>
+                  <Input
+                    {...registerForm2("image")}
+                    type="text"
+                    placeholder="image"
+                    id="image"
+                    name="image"
+                  />
+                  <label htmlFor="image">category</label>
+                  <Input
+                    {...registerForm2("category")}
+                    type="text"
+                    placeholder="category"
+                    id="category"
+                    name="category"
+                  />
+                  <br />
+                  <Button type="submit" className="w-full">
+                    Add Blog
+                  </Button>
+                </form>
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
         {/* Update Product */}
         <Sheet>
           <SheetTrigger className="mr-1">
